@@ -24,7 +24,7 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/docker-cd:${{ steps.version.outputs.VERSION }} .
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/adonis-app:${{ steps.version.outputs.VERSION }} ${{ secrets.DOCKERHUB_USERNAME }}/docker-cd:latest
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/docker-cd:${{ steps.version.outputs.VERSION }} ${{ secrets.DOCKERHUB_USERNAME }}/docker-cd:latest
 
       - name: Push Docker Image
         run: |
