@@ -1,0 +1,18 @@
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    command: --port=${DB_PORT}  # pour s'assurer que le conteneur écoute sur ce port
+
+volumes:
+  mariadb_data:
