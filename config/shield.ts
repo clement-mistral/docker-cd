@@ -16,7 +16,7 @@ const shieldConfig = defineConfig({
    * to learn more
    */
   csrf: {
-    enabled: true,
+    enabled: false,
     exceptRoutes: [],
     enableXsrfCookie: true,
     methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
@@ -35,7 +35,7 @@ const shieldConfig = defineConfig({
    * Force browser to always use HTTPS
    */
   hsts: {
-    enabled: true,
+    enabled: false,
     maxAge: '180 days',
   },
 
