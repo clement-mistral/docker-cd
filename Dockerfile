@@ -1,19 +1,21 @@
 FROM node:24.11.0-alpine3.22 AS base
 
 # All deps stage
-FROM BASE as deps
+FROM base as deps
 WORKDIR /app
-ADD package.json pnpm-lock.json pnpm-workspace.yaml ./
+ADD package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 # Production build
 FROM base AS build
+WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm install -g pnpm && pnpm exec node ace build
 
 # Production dependencies
 FROM base AS production-deps
+WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN npm install -g pnpm && pnpm install --frozen-lockfile --prod
 
